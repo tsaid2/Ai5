@@ -4,14 +4,15 @@ using Random
 #Random.seed!(9874984737484)
 
 for tests in [
-            #"runtestAdd.jl", 			# pb
+            "runtestAdd.jl", 			# pb
 			#"runtestLogicalOr.jl",		#
 			#"runtestLogicalXor.jl", 	#
-			"runtestReverseString.jl",	# wroked once, pb, don't know why it doesn't work, working on
+			#"runtestReverseString.jl",	# worked twice, pb, don't know why it doesn't work, working on
 			#"runtestLengthString.jl"	# work twice and didn't try since
 			#"runtestString.jl",		# work sure
 			#"runtestLogicalAnd.jl",	# wrok with extended sure
 			#"runtestRepeat.jl",		# work sure
+			#"runtestWarningCountdown.jl"
 ]
     include(tests)
 end

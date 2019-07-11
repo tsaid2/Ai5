@@ -6,7 +6,7 @@ bfArray2 = [0.212046, 0.244306, 0.377881, 0.830958, 0.64464, 0.719155, 0.0548315
 
 
 #triche = "++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>++.>+.+++++++..+++.<<++++++++++++++.------------.>+++++++++++++++.>.+++.------.--------.<<.+."
-triche = ">>,[+[,<+>]>]<,[[,-,<-,,,]]+[<.[<]]"
+triche = "+[+-+++[+++++++++++[++[++++++[+++++[+++++++++++++++++++++-+++++++++++++[+++++++++[++++++++++++++++++++-+++++++[++++[[+[++++++++++++++-.-------------.-..++++++--+.--]>->-<.<]>"
 #bft2 = bfType(triche)
 
 #bft = bfType(bfArray2)
@@ -19,10 +19,10 @@ if true
     #try
          #output= execute(bft2, ['t', 'o', 'i', 'm', 'i', 'd','t', 'o', 'i', 'm', 'i', 'd', 't', 'o', 'i', 'm', 'i', 'd'])
          instructionsSet = BfInterpreter.getInstructionsDict()
-         output = execute(triche , "turjslzpzRFTJUIOPDFGTH", instructionsSet :: Any)
+         output = execute(triche , "", instructionsSet :: Any)
          #output = execute(bft2, [Char(10), Char(1)])
          #output = execute(bft2)
-         @show Int(output[1][1])
+         #@show Int(output[1][1])
          if length(output) < 40
              @show join(output, "")
          else
