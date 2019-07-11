@@ -1,0 +1,7 @@
+targetFitness = 1280 
+params : Main.GeneticAlgorithms.Types.GAParams(100, 100000, 120, 150, 0.7, 0.01, true, IOStream(<file ../Results/logLengthString.log>), 31549.0, 1280.0, 0, 1) 
+2019-07-10T23:50:54.417 , Gen : 100 , BEST: 1231 , SECOND: 1231 
+2019-07-10T23:51:03.814 , Gen : 200 , BEST: 1236 , SECOND: 1236 
+2019-07-10T23:51:12.876 , Gen : 300 , BEST: 1236 , SECOND: 1236 
+2019-07-10T23:51:20.037 , Gen : 400 , BEST: 1236 , SECOND: 1236 
+2019-07-10T23:51:27.181 , Gen : 500 , BEST: 1236 , SECOND: 1236 
