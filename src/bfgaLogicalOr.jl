@@ -18,7 +18,7 @@ module bfgaLogicalOr
     export _trainingExamples, _trainingResults, fitness
 
     _trainingExamples = [ "00" , "01" , "10" , "11" ]
-    _trainingResults = [ "0", "1", "1", "1" ]
+    _trainingResults = [ '0', '1', '1', '1' ]
 
     function fitness(ent, instructionsSet)
         #println(" $(join(genesToBfInstructions(ent.dna),"")) ")
@@ -30,73 +30,26 @@ module bfgaLogicalOr
         score
     end
 
-    function fitness_aux(ent, instructionsSet)
-        n = rand(1:4)
-        fitness_aux(ent, n, instructionsSet)
-    end
-
 
     function fitness_aux(ent, num, instructionsSet)
         input = _trainingExamples[num]
         goal = _trainingResults[num]
 
-        target_length = length(goal)
-        target_score = target_length*256 #+10
+        #target_length = length(goal)
+        #target_score = target_length*256 #+10
         try
-            #println("eee fitness")
-            #bft = bfType(ent.dna)
-            babyrunnable =  true #runnable!(bft)
-            output, _ = execute(ent.program, input, instructionsSet)
-            #mem = length(output) < 20 ? output : output[1:20]
-            #@show join(mem, "")
-            #println("after eee fitness")
-            score = 0
-            n= length(output)
-            if n < target_length
-                score += 0 # 10*((target_length- abs(n- target_length))/target_length)
-            end
-            if babyrunnable
-                score += 0
-            else
-                score -=15
-            end
+            output, m_Ticks = execute(ent.program, input, instructionsSet)
 
-            compteur =0
-            for i in output
-                compteur += 1
-                if compteur > target_length
-                    break
-                end
-                score += 256 - abs(i - goal[compteur])
-            end
+            score = 256 - abs(output[1] - goal)
 
-            #@show join(bft.bfcode, "")
-            #=@show abs(score - target_score)
-            @show bft.bfcode
-            if length(output) < 5
-                @show join(output, "")
-            else
-                @show join(output, "")[1:15]
-            end
-            #@show ent.dna=#
+            ent.bonus += (2000 - m_Ticks)
 
             abs(score) +10 # - target_score)
         catch y
-            if y isa BracketError
-                return 10 #target_score
-            elseif y isa MermoryBfVM
-                return 4 #target_score  + 20
-            elseif y isa Main.bfga.BfInterpreter.MermoryBfVM
-                return 4
-            end
-            @show ent.dna
-            throw(y)
+            0
         end
     end
 
-    function getBfCode(ent)
-        join( ent.program , "")
-    end
 
     function simulate_entity(ent, instructionsSet)
         #bft = bfType(ent.dna)

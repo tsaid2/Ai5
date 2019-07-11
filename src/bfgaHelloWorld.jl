@@ -52,19 +52,11 @@ module bfgaHelloWorld
             ent.bonus += bonus
 
             #@show ent.dna
-            ent.fitness = 10+ abs(score )
-            10+ abs(score )#- target_score)
+            score = 10+ abs(score )
+            ent.fitness = score
+            score #- target_score)
         catch y
-            ent.fitness = 5
-            if y isa BracketError
-                return 5 #target_score
-            elseif y isa MermoryBfVM
-                return 5 #target_score  + 20
-            elseif y isa Main.bfga.BfInterpreter.MermoryBfVM
-                return 5
-            end
-            @show ent.dna
-            throw(y)
+            3
         end
     end
 
@@ -115,9 +107,6 @@ module bfgaHelloWorld
         return Main.GeneticAlgorithms.Types.GAParams(136, 1000000 , 186, 200, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
     end
 
-    function getBfCode(ent)
-        join( ent.program , "")
-    end
 
 end
 

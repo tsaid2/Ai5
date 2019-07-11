@@ -18,26 +18,6 @@ module bfgaLengthString
     using .BfInterpreter
     using Distributed
 
-    function takeAString()
-        n = rand(1:4)
-        takeAString(n)
-    end
-
-    #=function takeAString(n)
-        if n == 1
-            return "s"
-        elseif n == 2
-            return "me"
-        elseif n == 3
-            return "jay"
-        elseif n == 4
-            return "kory"
-        elseif n== 5
-            return "croissant"
-        else n== 6
-            return "franceInter"
-        end
-    end=#
 
     words = ["cori@domain.com", "mt@po.box", "test", "johnandjanesdfgjnsdkfjgjnrtkhreuitgure", "unknown-string-goes-here"]
     _results = [15,9,4,38,24]
@@ -64,47 +44,29 @@ module bfgaLengthString
         #goal = takeAString(num)
         input = words[num]
         goal = Char(_results[num])
-        target_length = length(goal)
-        target_score = target_length*256 #+10
+        #target_length = length(goal)
+        #target_score = target_length*256 #+10
         try
-            #println("eee fitness")
-            #bft = bfType(ent.dna)
-            output, ticks = execute(ent.program, input, instructionsSet)
-            #mem = length(output) < 20 ? output : output[1:20]
-            #@show join(mem, "")
-            #println("after eee fitness")
+
+            output, m_Ticks = execute(ent.program, input, instructionsSet)
+
             score = 0
             n= length(output)
-            #=if n < target_length
-                score += 0 # 10*((target_length- abs(n- target_length))/target_length)
-            end =#
-            score = n > 0 ? (256 - abs(output[1] - goal)) : 0
 
-            #bonus = 0
-            #targetFit = getTargetFitness()
-            ent.bonus += (2000 - ticks) / 20
+            score = 256 - abs(output[1] - goal)
+
+            ent.bonus += (2000 - m_Ticks)
 
             abs(score)# - target_score)
         catch y
-            if y isa BracketError
-                return 0 #target_score + 20
-            elseif y isa MermoryBfVM
-                return 0 #target_score
-            elseif y isa Main.bfga.BfInterpreter.MermoryBfVM
-                return 0
-            end
-            println("error in fitness bfgaRepeat")
-            @show ent.dna
-            throw(y)
+            0
         end
     end
 
     function simulate_entity(ent, instructionsSet)
-        #bft = bfType(ent.dna)
         goal = words[rand(1:5)]
         target_goal = 1
         _res = "code : $(ent.program ) "
-        #println(_res)
         try
             output, m_Ticks = execute(ent.program,goal, instructionsSet)
             if length(output) > 0

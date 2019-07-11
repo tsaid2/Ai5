@@ -88,6 +88,9 @@ module bfga
         instructions
     end
 
+    function getBfCode(ent)
+        ent.program
+    end
 
     #=function group_entities!(pop)
         println("BEST: ", pop[1].fitness)

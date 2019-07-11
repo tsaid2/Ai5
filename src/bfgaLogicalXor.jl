@@ -46,21 +46,12 @@ module bfgaLogicalXor
             output, m_Ticks = execute(ent.program, input, instructionsSet)
             n= length(output)
 
-            score = n > 0 ? (256 - abs(output[1] - goal)) : 0
-            #score -= abs(n-1) # penalty
-            #score += abs(2000 - m_Ticks) / 8010
+            score = 256 - abs(output[1] - goal)
+            ent.bonus += (2000 - m_Ticks)
 
             abs(score) # - target_score)
         catch y
-            if y isa BracketError
-                return 0 #target_score
-            elseif y isa MermoryBfVM
-                return 0 #target_score  + 20
-            elseif y isa Main.bfga.BfInterpreter.MermoryBfVM
-                return 0
-            end
-            @show ent.dna
-            throw(y)
+            0
         end
     end
 

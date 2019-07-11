@@ -1,8 +1,16 @@
-params : Main.GeneticAlgorithms.Types.GAParams(136, 1000000, 50, 150, 0.7, 0.01, true, IOStream(<file ../Results/logReversingString.log>), 94638.0, 5406.0, 0, 1) 
-2019-07-11T00:31:16.296 , Gen : 100 , BEST: 5256 , SECOND: 5256 
-2019-07-11T00:31:24.85 , Gen : 200 , BEST: 5267 , SECOND: 5267 
-2019-07-11T00:31:34.106 , Gen : 300 , BEST: 5267 , SECOND: 5267 
-2019-07-11T00:31:42.393 , Gen : 400 , BEST: 5269 , SECOND: 5269 
-2019-07-11T00:31:48.285 , Gen : 500 , BEST: 5259 , SECOND: 5259 
-2019-07-11T00:31:54.793 , Gen : 600 , BEST: 5260 , SECOND: 5260 
-2019-07-11T00:32:03.479 , Gen : 700 , BEST: 5264 , SECOND: 5261 
+params : Main.GeneticAlgorithms.Types.GAParams(136, 1000000, 50, 150, 0.7, 0.01, true, IOStream(<file ../Results/logReversingString.log>), 71625.0, 5406.0, 0, 1) 
+2019-07-11T12:15:24.114 , Gen : 100 , BEST: 5265 , SECOND: 5265 
+2019-07-11T12:15:32.188 , Gen : 200 , BEST: 5270 , SECOND: 5270 
+fitness : 5270 
+  code : ,.-[[-.[,[[+..>],.]]-,].<,],,],--->>-,[<[+[,[,>>>,  
+ try to Reverse me --> trssyzz !!tuuopp 
+2019-07-11T12:15:41.029 , Gen : 300 , BEST: 5270 , SECOND: 5270 
+2019-07-11T12:15:50.254 , Gen : 400 , BEST: 5270 , SECOND: 5270 
+fitness : 5270 
+  code : ,.-[[-.[,[[+..>]<,.]]-]>]]->,-,[[--,--.[<[[,,>,>,-  
+ try to Reverse me --> trssyzz !!tuuopp 
+2019-07-11T12:15:59.646 , Gen : 500 , BEST: 5270 , SECOND: 5270 
+2019-07-11T12:16:07.05 , Gen : 600 , BEST: 5272 , SECOND: 5272 
+fitness : 5272 
+  code : ,.[-[[+-.[,[[+..>],.]+[+.]]<.-[[[[-<->,-<>[>>>.>,]  
+ try to Reverse me --> tsssyzz !!tuuopp 

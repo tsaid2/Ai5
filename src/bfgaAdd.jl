@@ -42,8 +42,6 @@ module bfgaAdd
         #target_length = 1
         #target_score = 256 #+10
         try
-            #println("eee fitness")
-            #bft = bfType(ent.dna)
             output, m_Ticks = execute(ent.program, input, instructionsSet)
             #score = 0
             #n= length(output)
@@ -61,10 +59,8 @@ module bfgaAdd
 
 
     function simulate_entity(ent, instructionsSet)
-        #bft = bfType(ent.dna)
         #_res = ""
         _res = "code : $(ent.program ) "
-        #println(_res)
         for i in 1:3
             try
                 n1 = rand(0:15)

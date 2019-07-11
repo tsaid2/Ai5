@@ -128,10 +128,8 @@ module GeneticAlgorithms
                 _log *= "BEST: $_fitness , "
                 _log *= "SECOND: $(model.population[l_1].fitness) \n"
                 print(_log)
-                if model.params.currentGeneration % 1000 ==0
-                    #=for ent in model.population
-                        @show model.specific_fitness.getBfCode(ent)
-                    end=# # To check the model population diversity
+                if model.params.currentGeneration % 200 ==0
+
                     _log *= show_simulation(model, model.population[lastIdx]) * "\n"
                 end
 

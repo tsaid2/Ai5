@@ -64,19 +64,13 @@ module bfgaRepeat
         goal = words[num]
         input = goal
         target_length = length(goal)
-        target_score = target_length*256 #+10
+        #target_score = target_length*256 #+10
         try
-            #println("eee fitness")
-            #bft = bfType(ent.dna)
+
             output, m_Ticks = execute(ent.program, input, instructionsSet)
-            #mem = length(output) < 20 ? output : output[1:20]
-            #@show join(mem, "")
-            #println("after eee fitness")
+
             score = 0
             n= length(output)
-            #=if n < target_length
-                score += 0 # 10*((target_length- abs(n- target_length))/target_length)
-            end =#
 
             compteur =0
             for i in output
@@ -96,16 +90,7 @@ module bfgaRepeat
 
             abs(score)# - target_score)
         catch y
-            if y isa BracketError
-                return 10 #target_score + 20
-            elseif y isa MermoryBfVM
-                return 0 #target_score
-            elseif y isa Main.bfga.BfInterpreter.MermoryBfVM
-                return 0
-            end
-            println("error in fitness bfgaRepeat")
-            @show ent.dna
-            throw(y)
+            0
         end
     end
 
