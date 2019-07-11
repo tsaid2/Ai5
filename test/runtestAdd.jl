@@ -21,10 +21,10 @@
     #bft = bfType(bfcode)
 
     for i in 1:3
-        nb1 = rand(0:50)
+        nb1 = rand(0:20)
         rest = 255 - nb1
         nb2 = rand(0: rest)
-        input :: Array{Char,1} = [Char(nb1),Char(nb2)]
+        input :: Array{Char,1} = [ nb1, nb2]
         output, _ = execute(prems.program, input)
         @test length(output) >= 1
         @test output[1] == Char(nb1+nb2)

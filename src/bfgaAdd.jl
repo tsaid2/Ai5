@@ -36,8 +36,8 @@ module bfgaAdd
 
 
     function fitness_aux(ent, num1, num2, instructionsSet)
-        input :: Array{Char,1} = [Char(num1),Char(num2)]
-        goal = Char(num1+num2)
+        input = UInt8[num1,num2]
+        goal = num1+num2
 
         #target_length = 1
         #target_score = 256 #+10
@@ -47,7 +47,7 @@ module bfgaAdd
             #n= length(output)
 
             #score = n > 0 ? (256 - abs(output[1] - goal)) : 0
-            score = 256 - abs(output[1] - goal)
+            score = 256 - abs(Int(output[1]) - goal)
 
             ent.bonus += 2000 - m_Ticks
 
@@ -66,7 +66,7 @@ module bfgaAdd
                 n1 = rand(0:15)
                 rest = 255 - n1
                 n2 = rand(0: 15)
-                output, _ = execute(ent.program, [Char(n1), Char(n2)], instructionsSet)
+                output, _ = execute(ent.program, UInt8[n1, n2], instructionsSet)
                 _res = _res * "\n $n1 + $n2 -> "
                 if length(output) == 0
                     _res = _res* " Void "

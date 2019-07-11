@@ -59,10 +59,16 @@ module bfgaWarningCountdown
 
                 # Go through each item (5 bottles of beer on the wall). + 1 for digit. and -1 to discard digit to index into text.
                 for k = 0:target_length # (int k = 0; k < _targetString.Length + 1; k++)
-                    if  n > (jj + k) # (_console.Length > jj + k)
+                    if  n > (jj + k +1) # (_console.Length > jj + k)
                         if (k < target_length)
                             # Verify text.
-                            score += 256 - abs(output[jj + k +1] - _targetString[k+1]);
+                            #@show _targetString[k+1], output
+                            try
+                                #@show jj, k,jj + k + 1
+                                score += 256 - abs(output[jj + k +1] - _targetString[k+1]);
+                            catch
+                                break
+                            end
                         else
                             # Verify digit.
                             score += 256 - abs( UInt8(output[jj + k +1]) - input[j+1]);
@@ -75,8 +81,7 @@ module bfgaWarningCountdown
 
             #bonus = 0
             #targetFit = getTargetFitness()
-            bonus = (2000 - m_Ticks)
-            ent.bonus += bonus
+            ent.bonus += (2000 - m_Ticks)
 
             abs(score)# - target_score)
         catch y
