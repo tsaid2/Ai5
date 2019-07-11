@@ -19,27 +19,6 @@ module bfgaReverseString
     using .BfInterpreter
 
 
-    function takeAString()
-        n = rand(1:4)
-        takeAString(n)
-    end
-
-    function takeAString(n)
-        if n == 1
-            return "s"
-        elseif n == 2
-            return "me"
-        elseif n == 3
-            return "OliviaRuiz"
-        elseif n == 4
-            return "kory"
-        elseif n== 5
-            return "chocolatine et pain au chocolat"
-        else n== 6
-            return "franceInterMarcheDuDimancheDeMai"
-        end
-    end
-
     words = ["s", "me", "jay", "kory", "franceInter"]
 
 

@@ -18,26 +18,6 @@ module bfgaRepeat
     using .BfInterpreter
     using Distributed
 
-    function takeAString()
-        n = rand(1:4)
-        takeAString(n)
-    end
-
-    #=function takeAString(n)
-        if n == 1
-            return "s"
-        elseif n == 2
-            return "me"
-        elseif n == 3
-            return "jay"
-        elseif n == 4
-            return "kory"
-        elseif n== 5
-            return "croissant"
-        else n== 6
-            return "franceInter"
-        end
-    end=#
 
     words = ["s", "me", "jay", "kory", "chocolatine et pain au chocolat", "franceInter"]
 
