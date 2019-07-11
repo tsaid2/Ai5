@@ -110,7 +110,7 @@ module bfgaLengthString
         tgFitness =  getTargetFitness()
         println("targetFitness = $tgFitness ")
         write(logfile, "targetFitness = $tgFitness \n")
-        return Main.GeneticAlgorithms.Types.GAParams(100, 100000 , 120, 150, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
+        return Main.GeneticAlgorithms.Types.GAParams(100, 100000 , 100, 150, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
     end
 
     function getBfCode(ent)
