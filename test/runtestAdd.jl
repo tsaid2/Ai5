@@ -24,8 +24,8 @@
         nb1 = rand(0:20)
         rest = 255 - nb1
         nb2 = rand(0: rest)
-        input :: Array{Char,1} = [ nb1, nb2]
-        output, _ = execute(prems.program, input)
+        input = UInt8[ nb1, nb2]
+        output, _ = execute(prems.program, input,  model.instructionsSet)
         @test length(output) >= 1
         @test output[1] == Char(nb1+nb2)
     end
