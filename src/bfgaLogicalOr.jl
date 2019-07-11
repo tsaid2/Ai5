@@ -16,18 +16,25 @@ module bfgaLogicalOr
     using .BfInterpreter
 
     export _trainingExamples, _trainingResults, fitness
-
-    _trainingExamples = [ "00" , "01" , "10" , "11" ]
-    _trainingResults = [ '0', '1', '1', '1' ]
+    #ns = Char(0)
+    #ms = Char(1)
+    #_trainingExamples = [ "$ns$ns" , "$ms$ns" , "$ns$ms" , "$ms$ms" ]
+    _trainingExamples = [ UInt8[0,0] , UInt8[1,0] , UInt8[0,1] , UInt8[1,1] ]
+    _trainingResults = [ 0, 1, 1, 1 ]
 
     function fitness(ent, instructionsSet)
         #println(" $(join(genesToBfInstructions(ent.dna),"")) ")
         score = 0
-        for i in 1:4
-            score += fitness_aux(ent, i, instructionsSet)
+        @sync for i in 1:4
+            @async score += fitness_aux(ent, i, instructionsSet)
         end
         ent.fitness = score
         score
+    end
+
+    function fitness_aux(ent, instructionsSet)
+        n = rand(1:4)
+        fitness_aux(ent, n, instructionsSet)
     end
 
 
@@ -36,20 +43,23 @@ module bfgaLogicalOr
         goal = _trainingResults[num]
 
         #target_length = length(goal)
-        #target_score = target_length*256 #+10
+        #target_score = target_length*256
         try
             output, m_Ticks = execute(ent.program, input, instructionsSet)
+            n= length(output)
 
-            score = 256 - abs(output[1] - goal)
-
+            score = 256 - abs(Int(output[1]) - goal)
             ent.bonus += (2000 - m_Ticks)
 
-            abs(score) +10 # - target_score)
+            abs(score) # - target_score)
         catch y
             0
         end
     end
 
+    function getBfCode(ent)
+        join( ent.program , "")
+    end
 
     function simulate_entity(ent, instructionsSet)
         #bft = bfType(ent.dna)
@@ -61,7 +71,7 @@ module bfgaLogicalOr
                 if length(output) == 0
                     _res = _res* "\n $(_trainingExamples[i]) -> Void "
                 else
-                    _res = _res* "\n $(_trainingExamples[i]) -> "*join(output[1], "")
+                    _res = _res* "\n $(_trainingExamples[i]) -> $(Int(output[1])) "
                 end
             catch y
                 _res = _res* "\n BEST raises Errors \n Error : $y "
@@ -73,7 +83,7 @@ module bfgaLogicalOr
     end
 
     function getTargetFitness()
-        256* 4 + 40
+        256* 4
     end
 
     function getParams()

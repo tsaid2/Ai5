@@ -23,7 +23,7 @@
     for i in 1:4
         output, _ = execute(prems.program, _trainingExamples[i], model.instructionsSet)
         @test length(output) >= 1
-        @test _trainingResults[i] == output[1]
+        @test _trainingResults[i] == Int(output[1])
     end
 
 
