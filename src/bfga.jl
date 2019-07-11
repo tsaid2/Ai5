@@ -55,26 +55,6 @@ module bfga
         end
     end
 
-    #=function floatToBfInstruction2( number ::Float64 )
-        @assert (number >= 0.0 && number <= 1.0)
-        if ( 0.0 <= number <= 0.125)
-            return '>'
-        elseif 0.125 < number <= 0.250
-            return '<'
-        elseif 0.250 < number <= 0.375
-            return '+'
-        elseif 0.375 < number <= 0.5
-            return '-'
-        elseif  0.5 < number <= 0.625
-            return ','
-        elseif 0.625 < number <= 0.75
-            return '['
-        elseif 0.75 < number <= 0.875
-            return ']'
-        elseif  0.875 < number <= 1.0
-            return '.'
-        end
-    end=#
 
     function entityToBfInstructions!( ent )
         ent.program = join(genesToBfInstructions(ent.dna), "")
@@ -273,6 +253,8 @@ module bfga
         end
     end
 
+
+
     function expand(ent , size :: Int)
         #println("EXPAND CAAALLLED")
         originalSize = length(ent.dna);
@@ -297,6 +279,7 @@ module bfga
         ent.m_length = size;
     end
 
+
     function clearCode!(ent)
         n = ent.m_length
         bfCodeArray = [] #Array{Float64,1}
@@ -318,30 +301,5 @@ module bfga
         ent.m_length = length(bfCodeArray)
     end
 
-    #=function simulate_entity(ent)
-        bft = bfType(ent.dna)
-        try
-            output = execute(bft, "moi toi")
-            if length(output) > 40
-                return join(output[1:40], "")
-            else
-                return join(output, "")
-            end
-        catch y
-            return "BEST raises Errors \n Error : $y "
-
-        end
-    end=#
 
 end
-
-
-#=include("../src/GeneticAlgorithms.jl")
-using .GeneticAlgorithms
-using Distributed
-using Pkg
-
-function test_serial()
-    GeneticAlgorithms.runga(bfgaRepeat; initial_pop_size = 135)
-end
-=#

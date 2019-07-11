@@ -66,43 +66,42 @@ module GeneticAlgorithms
         return "fitness : $(ent.fitness) \n $printed"
     end
 
-    function runga(mdl::Module, fit_mdl :: Module )#; initial_pop_size = 200)
-        model = GAmodel(fit_mdl.getParams())
-        #model.initial_pop_size = initial_pop_size
-        model.ga = mdl
-        model.instructionsSet = mdl.getInstructionsSet()
+    function runga(mdl::Module, fit_mdl :: Module )
         model.specific_fitness = fit_mdl
-
+        # get the parameters of the specific fitness
+        model = GAmodel(fit_mdl.getParams())
+        # save the ga (mutation and crossover units function)
+        model.ga = mdl
+        # save once the dictionary of instructions Set
+        model.instructionsSet = mdl.getInstructionsSet()
+        #run the ga
         runga(model; resume = false)
     end
 
-    function runga(mdl::Module) #; initial_pop_size = 200)
+    #= function runga(mdl::Module)  #deprecated
         model = GAmodel()
         model.instructionsSet = mdl.getInstructionsSet()
         #model.initial_pop_size = initial_pop_size
         model.ga = mdl
         # TODO, this function need a module for the model.specific_fitness !!
         runga(model; resume = false)
-    end
+    end=#
 
 
     function runga(model::GAmodel; resume = false)
         stop = false
-        #model.params :: GAParams = model.specific_fitness.getParams()
 
+        #set _expandAmount & _expandRate, TODO I think they are not placed very well in case we want specifi paramters for each fitness
         _expandAmount = 0
         _expandRate = 2000
 
         if (!resume)
-            #  Create the fitness table.
-            #model.params.fitnessTable = new List<double>();
-            #model.params.ThisGeneration = new List<Genome>(model.params.generations);
-            #model.params.nextGeneration = new List<Genome>(model.params.generations);
+            #  initialize params.
             model.params.totalFitness = 0;
             model.params.targetFitness = model.specific_fitness.getTargetFitness();
             model.params.targetFitnessCount = 0;
             model.params.currentGeneration = 0;
-            stop = false;
+            #stop = false;
 
             reset_model(model)
             create_initial_population(model)
@@ -110,6 +109,7 @@ module GeneticAlgorithms
         end
 
         if model.params.historyPath != nothing
+            #to save params in the history file
             write(model.params.historyPath, "params : " * string(model.params) * " \n")
         end
 
@@ -117,9 +117,9 @@ module GeneticAlgorithms
             #CreatenextGeneration();
             crossover_population(model, [])
             evaluate_population(model)
+
             lastIdx = model.params.populationSize #length(model.population)
             _fitness = model.population[lastIdx].fitness
-            #double fitness = RankPopulation();
 
             if model.params.currentGeneration % 100 == 0
                 _log = "$(Dates.now()) , "
@@ -128,7 +128,7 @@ module GeneticAlgorithms
                 _log *= "BEST: $_fitness , "
                 _log *= "SECOND: $(model.population[l_1].fitness) \n"
                 print(_log)
-                if model.params.currentGeneration % 200 ==0
+                if model.params.currentGeneration % 1000 ==0
 
                     _log *= show_simulation(model, model.population[lastIdx]) * "\n"
                 end
@@ -141,12 +141,13 @@ module GeneticAlgorithms
 
             #println("hehe $_fitness  $(model.params.targetFitness)")
             if (model.params.targetFitness > 0 && _fitness >= model.params.targetFitness)
-                println("/////////////////////// $(model.params.targetFitnessCount)")
+                #println("/////////////////////// $(model.params.targetFitnessCount)")
                 model.params.targetFitnessCount = model.params.targetFitnessCount +1
-                if (model.params.targetFitnessCount > 10)
+                if (model.params.targetFitnessCount > 100) # default : set to 1000
                     break;
                 end
             else
+                # in case we expand and lose the best one
                 model.params.targetFitnessCount = 0;
             end
 
@@ -155,7 +156,6 @@ module GeneticAlgorithms
             end=#
             if (_expandAmount > 0 && model.params.currentGeneration > 0 && model.params.currentGeneration % _expandRate == 0 && model.params.genomeSize < model.params.maxGenomeSize )
                 model.params.genomeSize +=  _expandAmount;
-                #model.params.genomeSize = _genomeSize;
                 #_bestStatus.Fitness = 0; # Update display of best program, since genome has changed and we have a better/worse new best fitness.
             end
 
@@ -181,19 +181,14 @@ module GeneticAlgorithms
 
         model.params.currentGeneration = 1
         empty!(model.population)
-        #empty!(model.pop_data)
-        #empty!(model.freezer)
     end
 
 
 
     function create_initial_population(model::GAmodel)
         for i = 1:model.params.populationSize
-            #@show model.params.genomeSize
             entity = model.ga.create_entity(i, model.params.genomeSize)
-
             push!(model.population, entity)
-            #push!(model.pop_data, EntityData(entity, model.params.currentGeneration))
         end
     end
 
@@ -203,6 +198,9 @@ module GeneticAlgorithms
     function evaluate_population(model::GAmodel)
         #pmap(model.ga.entityToBfInstructions!, model.population)
         #scores = [ model.specific_fitness.fitness(ent, model.instructionsSet) for ent in model.population ]
+
+        # for each entity, translate dna to bf instructions, then perform the specific fitness,
+        # it saves its fitness & bonus in itself and return the fitness, see the fitness function
         scores = pmap(
             ent -> (model.ga.entityToBfInstructions!(ent); model.specific_fitness.fitness(ent, model.instructionsSet))
             , model.population)
@@ -211,6 +209,7 @@ module GeneticAlgorithms
 
         #pmap(fitness!, model.population, scores) # TODO decomment for normal use
 
+        # the isless for the entities is defined in bfga
         sort!(model.population; rev = false)
         model.scores = sort!(scores; rev = false)
     end
@@ -223,19 +222,14 @@ module GeneticAlgorithms
         _length = 1
 
         model.population = Any[]
-        #sizehint!(model.population, length(thisGeneration))
-        #model.pop_data = EntityData[]
-        #sizehint!(model.pop_data, length(thisGeneration))
 
         model.params.currentGeneration += 1
         #println("Generation n' $(model.params.currentGeneration) ")
-        if true #Elitism
+        if model.params.elitism
             l = model.params.populationSize #length(thisGeneration)
             g = thisGeneration[l]
             l_1 = (model.params.populationSize) -1
             g2 = thisGeneration[l-1]
-            #g.age = thisGeneration[1].age
-            #g2.age = thisGeneration[2].age
             push!(model.population, g)
             #push!(model.pop_data, EntityData(g, model.params.currentGeneration))
             push!(model.population, g2)
@@ -249,8 +243,8 @@ module GeneticAlgorithms
         for i in _length:2:model.params.populationSize
             pidx1 = rouletteSelection(model)
             pidx2 = rouletteSelection(model)
-            #println("$pidx1    $pidx2")
-            child1, child2 = nothing, nothing # TODO decomment for normal use
+            #println("$pidx1    $pidx2") # for debugging
+            child1, child2 = nothing, nothing
             parent1 = thisGeneration[pidx1]
             parent2 = thisGeneration[pidx2]
 
@@ -261,9 +255,7 @@ module GeneticAlgorithms
             end
 
             push!(model.population, child1)
-            #push!(model.pop_data, EntityData(child1, model.params.currentGeneration))
             push!(model.population, child2)
-            #push!(model.pop_data, EntityData(child2, model.params.currentGeneration))
         end
         model.params.populationSize = length(model.population)
         #pmap(model.ga.clearCode!, model.population)
@@ -280,13 +272,14 @@ module GeneticAlgorithms
         end
     end
 
-    function mutate_population(model::GAmodel)
+    function mutate_population(model::GAmodel) # deprecated, the mutation is performed in the crossover
         pmap(model.ga.mutate, model.population)
         #=for entity in model.population
             model.ga.mutate(entity)
         end=#
     end
 
+    # We can add strangers in the population
     function add_stranger(model :: GAmodel, num)
         #println("-_-")
         for i in 1:num
