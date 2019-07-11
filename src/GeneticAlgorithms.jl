@@ -67,9 +67,10 @@ module GeneticAlgorithms
     end
 
     function runga(mdl::Module, fit_mdl :: Module )
-        model.specific_fitness = fit_mdl
         # get the parameters of the specific fitness
         model = GAmodel(fit_mdl.getParams())
+        model.specific_fitness = fit_mdl
+
         # save the ga (mutation and crossover units function)
         model.ga = mdl
         # save once the dictionary of instructions Set

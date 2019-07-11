@@ -8,10 +8,10 @@ for tests in [
 			#"runtestLogicalOr.jl",		#
 			#"runtestLogicalXor.jl", 	#
 			#"runtestReverseString.jl",	# pb, don't know why it doesn't work, working on
-			#"runtestLengthString.jl"	#
-			"runtestString.jl",		#
-			"runtestLogicalAnd.jl",		#
-			"runtestRepeat.jl",		#
+			"runtestLengthString.jl"	#
+			#"runtestString.jl",		#
+			#"runtestLogicalAnd.jl",		#
+			#"runtestRepeat.jl",		#
 ]
     include(tests)
 end
