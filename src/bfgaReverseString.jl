@@ -19,7 +19,7 @@ module bfgaReverseString
     using .BfInterpreter
 
 
-    words = ["s", "me", "jay", "kory", "franceInter"]
+    words = ["s", "me", "jay", "kory", "jamie"]
 
 
     function fitness(ent, instructionsSet)
@@ -58,8 +58,8 @@ module bfgaReverseString
                 score += 256 - abs(i - goal[compteur])
             end
 
-            bonus = (2000 - m_Ticks)
-            ent.bonus += bonus
+            ent.bonus += (2000 - m_Ticks)
+            #ent.bonus += bonus
 
             abs(score) + 6# - target_score)
         catch y
@@ -111,7 +111,7 @@ module bfgaReverseString
 
         tgFitness =  getTargetFitness()
         println("targetFitness = $tgFitness ")
-        return Main.GeneticAlgorithms.Types.GAParams(136, 1000000 , 50, 150, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
+        return Main.GeneticAlgorithms.Types.GAParams(136, 1000000 , 120, 150, 0.7, 0.015, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
     end
 
     function getBfCode(ent)

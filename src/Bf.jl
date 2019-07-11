@@ -30,7 +30,7 @@ module BfInterpreter
         ignoreJump :: Bool
         ignoreComment :: Bool
         output :: Array{Char,1}         # Data returned
-        input :: String
+        input #:: String
         indexInput :: Int
         l_input :: Int
         m_Stop :: Bool
@@ -138,16 +138,19 @@ module BfInterpreter
         instructionsSet
     end
 
+    #=function execute(bfcode :: String, input :: Array{UInt8,1}, instructionSet)
+        execute(bfcode, join(map((v -> Char(v)), input), ""), instructionSet)
+    end =#
 
     function execute(bfcode :: String, instructionSet )
         execute(bfcode, "", instructionSet)
     end
 
-    function execute(bfcode :: String, input :: Array{Char,1}, instructionSet )
+    #=function execute(bfcode :: String, input :: Array{Char,1}, instructionSet )
         execute(bfcode, join(input, ""), instructionSet)
-    end
+    end=#
 
-    function execute(bfcode :: String, input :: String, instructionSet )
+    function execute(bfcode :: String, input , instructionSet )
 
         # initialize the vm
         vm = bfVM( [0 for i=1:2000], 2000, 1, length(bfcode),

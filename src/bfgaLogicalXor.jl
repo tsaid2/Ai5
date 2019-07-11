@@ -16,9 +16,11 @@ module bfgaLogicalXor
     using .BfInterpreter
 
     export _trainingExamples, _trainingResults, fitness
-
-    _trainingExamples = [ "00" , "01" , "10" , "11" ]
-    _trainingResults = [ '0', '1', '1', '0' ]
+    ns = Char(0)
+    ms = Char(1)
+    #_trainingExamples = [ "$ns$ns" , "$ms$ns" , "$ns$ms" , "$ms$ms" ]
+    _trainingExamples = [ UInt8[0,0] , UInt8[1,0] , UInt8[0,1] , UInt8[1,1] ]
+    _trainingResults = [ 0, 1, 1, 0 ]
 
     function fitness(ent, instructionsSet)
         #println(" $(join(genesToBfInstructions(ent.dna),"")) ")
@@ -46,7 +48,7 @@ module bfgaLogicalXor
             output, m_Ticks = execute(ent.program, input, instructionsSet)
             n= length(output)
 
-            score = 256 - abs(output[1] - goal)
+            score = 256 - abs(Int(output[1]) - goal)
             ent.bonus += (2000 - m_Ticks)
 
             abs(score) # - target_score)
@@ -69,7 +71,7 @@ module bfgaLogicalXor
                 if length(output) == 0
                     _res = _res* "\n $(_trainingExamples[i]) -> Void "
                 else
-                    _res = _res* "\n $(_trainingExamples[i]) -> "*join(output[1], "")
+                    _res = _res* "\n $(_trainingExamples[i]) -> $(Int(output[1])) "
                 end
             catch y
                 _res = _res* "\n BEST raises Errors \n Error : $y "
@@ -109,7 +111,7 @@ module bfgaLogicalXor
         tgFitness =  getTargetFitness()
         println("targetFitness = $tgFitness ")
         write(logfile, "targetFitness = $tgFitness \n")
-        return Main.GeneticAlgorithms.Types.GAParams(136, 100000 , 150, 150, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
+        return Main.GeneticAlgorithms.Types.GAParams(136, 1000000 , 150, 150, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
     end
 
 end
