@@ -24,9 +24,9 @@
     output2, _ = execute(prems.program, input2, model.instructionsSet)
 
     @test length(output1) >= n1
-    @test reverse(collect(input1[1:n1])) == reverse(output1[1:n1])
+    @test collect(input1[1:n1]) == reverse(output1[1:n1])
     @test length(output2) >= n2
-    @test reverse(collect(input2[1:n2])) == reverse(output2[1:n2])
+    @test collect(input2[1:n2]) == reverse(output2[1:n2])
 
 
     # do the test_parallel after ...
