@@ -123,7 +123,7 @@ module bfgaExtractInQuoteInside
         tgFitness =  getTargetFitness()
         println("targetFitness = $tgFitness ")
         write(logfile, "targetFitness = $tgFitness \n")
-        return Main.GeneticAlgorithms.Types.GAParams(100, 1000000 , 150, 200, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
+        return Main.GeneticAlgorithms.Types.GAParams(100, 1000000 , 20, 110, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
     end
 
     function getBfCode(ent)
