@@ -225,15 +225,17 @@ module GeneticAlgorithms
         model.population = Any[]
 
         model.params.currentGeneration += 1
+        g = model.ga.create_entity(model.params.currentGeneration, model.params.genomeSize)
+        g2 = model.ga.create_entity(model.params.currentGeneration, model.params.genomeSize)
         #println("Generation n' $(model.params.currentGeneration) ")
         if model.params.elitism
             l = model.params.populationSize #length(thisGeneration)
             g = thisGeneration[l]
             l_1 = (model.params.populationSize) -1
             g2 = thisGeneration[l-1]
-            push!(model.population, g)
+            #push!(model.population, g)
             #push!(model.pop_data, EntityData(g, model.params.currentGeneration))
-            push!(model.population, g2)
+            #push!(model.population, g2)
             #push!(model.pop_data, EntityData(g2, model.params.currentGeneration))
 
             _length += 2;
@@ -258,6 +260,14 @@ module GeneticAlgorithms
             push!(model.population, child1)
             push!(model.population, child2)
         end
+
+        if model.params.elitism
+            push!(model.population, g)
+            #push!(model.pop_data, EntityData(g, model.params.currentGeneration))
+            push!(model.population, g2)
+            #push!(model.pop_data, EntityData(g2, model.params.currentGeneration))
+        end
+
         model.params.populationSize = length(model.population)
         #pmap(model.ga.clearCode!, model.population)
 
