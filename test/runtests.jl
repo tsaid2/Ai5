@@ -4,8 +4,8 @@ using Random
 #Random.seed!(9874984737484)
 
 for tests in [
-			"runtestString.jl",		# work sure
-            #"runtestAdd.jl", 			# pb
+			#"runtestString.jl",		# work sure
+            #"runtestAdd.jl", 			#
 			#"runtestLogicalOr.jl",		#
 			#"runtestLogicalXor.jl", 	#
 			#"runtestReverseString.jl",	# worked twice, pb, don't know why it doesn't work, working on
@@ -13,7 +13,8 @@ for tests in [
 			#"runtestString.jl",		# work sure
 			#"runtestLogicalAnd.jl",	# wrok with extended sure
 			#"runtestRepeat.jl",		# work sure
-			#"runtestWarningCountdown.jl"
+			#"runtestWarningCountdown.jl" # Doesn't work, NENI
+			"runtestExtractInQuote.jl"
 ]
     include(tests)
 end
