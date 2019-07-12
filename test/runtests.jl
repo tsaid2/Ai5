@@ -14,7 +14,8 @@ for tests in [
 			#"runtestLogicalAnd.jl",	# wrok with extended sure
 			#"runtestRepeat.jl",		# work sure
 			#"runtestWarningCountdown.jl" # Doesn't work, NENI
-			"runtestExtractInQuote.jl"
+			#"runtestExtractInQuote.jl"
+			"runtestExtractInQuoteInside.jl"
 ]
     include(tests)
 end
