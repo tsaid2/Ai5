@@ -17,7 +17,7 @@ module bfgaHelloWorld
     include("Bf.jl")
     using .BfInterpreter
 
-    goal = "hi"
+    goal = "Joyeux anniversaire"
     target_length = length(goal)
     target_score = target_length*256 +10
 
@@ -104,7 +104,7 @@ module bfgaHelloWorld
         tgFitness =  getTargetFitness()
         println("targetFitness = $tgFitness ")
         write(logfile, "targetFitness = $tgFitness \n")
-        return Main.GeneticAlgorithms.Types.GAParams(136, 1000000 , 186, 200, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
+        return Main.GeneticAlgorithms.Types.GAParams(136, 10000000 , 300, 300, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
     end
 
 
