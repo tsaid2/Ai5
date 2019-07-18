@@ -1,5 +1,5 @@
 
-module bfgaTimesTwo
+module bfgaTimesThree
 
     import Base.isless
 
@@ -37,7 +37,7 @@ module bfgaTimesTwo
 
     function fitness_aux(ent, num1, instructionsSet)
         input = UInt8[num1]
-        goal = num1*2
+        goal = num1*3
 
         #target_length = 1
         #target_score = 256 #+10
@@ -65,7 +65,7 @@ module bfgaTimesTwo
             try
                 n1 = rand(0:15)
                 output, _ = execute(ent.program, UInt8[n1], instructionsSet)
-                _res = _res * "\n $n1 * 2 -> "
+                _res = _res * "\n $n1 * 3 -> "
                 if length(output) == 0
                     _res = _res* " Void "
                 else
@@ -103,7 +103,7 @@ module bfgaTimesTwo
         #nextGeneration :: Array
         #fitnessTable :: Array{Float64,1}
         =#
-        logfile = open("../Results/logTimesTwo.log", "w")
+        logfile = open("../Results/logTimesThree.log", "w")
 
         tgFitness =  getTargetFitness()
         println("targetFitness = $tgFitness ")
@@ -126,5 +126,5 @@ using Distributed
 using Pkg
 
 function test_serial()
-    GeneticAlgorithms.runga(bfga, bfgaTimesTwo) #, initial_pop_size = 135)
+    GeneticAlgorithms.runga(bfga, bfgaTimesThree) #, initial_pop_size = 135)
 end
