@@ -141,7 +141,7 @@ module bfga
         for pos in 1:m_length
 
             # Should this bit mutate?
-            if (rand() < 0.01)
+            if (rand() < 0.06)
                 # Select a mutation type.
                 r = rand()
                 if (r <= 0.25)

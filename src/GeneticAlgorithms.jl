@@ -255,6 +255,8 @@ module GeneticAlgorithms
                 child1, child2 = model.ga.crossover(Any[parent1, parent2])
             else
                 child1, child2 = parent1, parent2
+                parent1.bonus = 0
+                parent2.bonus = 0
             end
 
             push!(model.population, child1)

@@ -17,7 +17,7 @@ module bfgaHelloWorld
     include("Bf.jl")
     using .BfInterpreter
 
-    goal = "Joyeux anniversaire"
+    goal = "birthday"
     target_length = length(goal)
     target_score = target_length*256 +10
 
@@ -40,7 +40,7 @@ module bfgaHelloWorld
             if n < target_length
                 score += 0 # 10*((target_length- abs(n- target_length))/target_length)
             end
-
+            bonus = 0
             for i in 1:n
                 if i > target_length
                     break
@@ -48,7 +48,8 @@ module bfgaHelloWorld
                 score += 256 - abs(output[i] - goal[i])
             end
 
-            bonus = (2001 - m_Ticks)
+            bonus += (2001 - m_Ticks) #/20
+            #bonus += 10 * ((target_length - abs(n -target_length)) / target_length)
             ent.bonus += bonus
 
             #@show ent.dna
@@ -104,7 +105,7 @@ module bfgaHelloWorld
         tgFitness =  getTargetFitness()
         println("targetFitness = $tgFitness ")
         write(logfile, "targetFitness = $tgFitness \n")
-        return Main.GeneticAlgorithms.Types.GAParams(136, 10000000 , 300, 300, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
+        return Main.GeneticAlgorithms.Types.GAParams(156, 10000000 , 250, 250, 0.8, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
     end
 
 

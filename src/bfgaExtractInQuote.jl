@@ -64,6 +64,8 @@ module bfgaExtractInQuote
                 #println()
             end
 
+            score -= max( 15,abs(n- target_length))
+
             #bonus = 0
             #targetFit = getTargetFitness()
             bonus = (2000 - m_Ticks)
@@ -83,8 +85,8 @@ module bfgaExtractInQuote
         #println(_res)
         try
             output, ticks = execute(ent.program, "\"$goal\"", instructionsSet)
-            if length(output) > target_goal
-                return " $_res \n $goal --> "*join(output[1:target_goal], "")
+            if length(output) > target_goal+5
+                return " $_res \n $goal --> "*join(output[1:target_goal+5], "")
             else
                 return " $_res \n $goal --> "*join(output, "")
             end
@@ -124,7 +126,7 @@ module bfgaExtractInQuote
         tgFitness =  getTargetFitness()
         println("targetFitness = $tgFitness ")
         write(logfile, "targetFitness = $tgFitness \n")
-        return Main.GeneticAlgorithms.Types.GAParams(100, 10000 , 120, 150, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
+        return Main.GeneticAlgorithms.Types.GAParams(100, 100000 , 120, 150, 0.7, 0.01, true, logfile ,  0.0 , tgFitness, 0.0 , 0 )
     end
 
     function getBfCode(ent)

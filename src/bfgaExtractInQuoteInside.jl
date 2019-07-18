@@ -76,16 +76,20 @@ module bfgaExtractInQuoteInside
 
     function simulate_entity(ent, instructionsSet)
         #bft = bfType(ent.dna)
-        goal = "try to \"ExtractInQuoteInside\" this"
-        target_goal = length("ExtractInQuoteInside")
+        #goal = "try to \"ExtractInQuoteInside\" this"
+        #target_goal = length("ExtractInQuoteInside")
+        num = rand(1:4)
+        input = words[num]
+        goal = _results[num]
+        target_goal = length(goal)
         _res = "code : $(ent.program ) "
         #println(_res)
         try
-            output, ticks = execute(ent.program, goal, instructionsSet)
+            output, ticks = execute(ent.program, input, instructionsSet)
             if length(output) > target_goal
-                return " $_res \n ExtractInQuoteInside --> "*join(output[1:target_goal], "")
+                return " $_res \n $goal --> "*join(output[1:target_goal], "")
             else
-                return " $_res \n ExtractInQuoteInside --> "*join(output, "")
+                return " $_res \n $goal --> "*join(output, "")
             end
         catch y
             return " $_res \n BEST raises Errors \n Error : $y "
