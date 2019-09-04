@@ -3,7 +3,7 @@
 This algorithm is based on Ai Pogrammer: an Ai developed in C# by Kory Becker using Genetic Algorithms to generate brainfuck code.
 See its Github repository which refers to its article: https://github.com/primaryobjects/AI-Programmer.
 
-Ai5 is therefore the version of Ai Programmer in Julia.
+Ai5 is therefore the version of Ai Programmer in Julia without the extended-III Brainfuck.
 
 ## The architecture of the algorithm : 
 
@@ -49,6 +49,6 @@ To change unit operations, you can copy (or not) bfga.jl and change the body of 
 ### Run Tests
 Finally, you can write a test file in the test/ folder to check the partial correctness of the returned program. In those given in this repository, the format is runtestLengthString.
 
-
+## Results
 
 
