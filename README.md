@@ -1,7 +1,7 @@
 # Ai5
 
 This algorithm is based on Ai Pogrammer: an Ai developed in C# by Kory Becker using Genetic Algorithms to generate brainfuck code.
-See its Github repository which refers to its article: https://github.com/primaryobjects/AI-Programmer.
+See its Github repository which refers to the Becker's article: https://github.com/primaryobjects/AI-Programmer.
 
 Ai5 is therefore the version of Ai Programmer in Julia without the extended-III Brainfuck.
 
