@@ -8,11 +8,13 @@ Ai5 is therefore the version of Ai Programmer in Julia.
 ## The architecture of the algorithm : 
 
  List of modules of the GA:
- 	- GeneticAlgorithms: this module is the GA Manager. It does every operation of the global algorithm: evaluate and crossover population, write on the log file, decide when the genome size has to be expanded and when the algorithm has to stop.
-	- bfga: this module performs all unit operations on individuals: creates, mutates individuals, decodes the Brainfuck from genome.
-	- Bf: the embedded Brainfuck interpreter
-	- bfgaAdd: this type of file represents the fitness function associated with the "addition" operation. It also contains the initial parameters of individuals (genome size, etc). The GA can be started from this file by calling the "test\_serial" method.
-	- Types.jl : This file contains 2 types: GAmodel which is used by GeneticAlgorithms to manage the GA and GAParams, used by the different fitness functions to give the desired initial parameters.
+ <ul>
+<li>GeneticAlgorithms: this module is the GA Manager. It does every operation of the global algorithm: evaluate and crossover population, write on the log file, decide when the genome size has to be expanded and when the algorithm has to stop.</li>
+<li>bfga: this module performs all unit operations on individuals: creates, mutates individuals, decodes the Brainfuck from genome.</li>
+<li>Bf: the embedded Brainfuck interpreter. </li>
+<li>bfgaAdd: this type of file represents the fitness function associated with the "addition" operation. It also contains the initial parameters of individuals (genome size, etc). The GA can be started from this file by calling the "test\_serial" method.</li>
+<li>Types.jl : This file contains 2 types: GAmodel which is used by GeneticAlgorithms to manage the GA and GAParams, used by the different fitness functions to give the desired initial parameters.</li>
+</ul>
 
 ## Use the algorithm : 
 To use the algorithm, you must implement the fitness function corresponding to your task. For the illustration, we will use the fitness function of length(::String) which we call bfgaLengthString in the src/ folder.
