@@ -40,7 +40,6 @@ A bonus can be earned according to criteria you choose. Here it's about the numb
 
 Do not forget to build the input/output set illustrating the task to be accomplished.
 
-Pour lancer le GA avec ta fitness function, Vous appelez ```GeneticAlgorithms.runga(bfga, bfgaLengthString)```. GeneticAlgorithms va alors utiliser le module bfga pour les opérations sur les programmes (mutations, crossover etc.) et bfgaLengthString pour la fonction de fitness.
 To start the GA with your fitness function, you call ```GeneticAlgorithms.runga(bfga, bfgaLengthString)```. GeneticAlgorithms will use the bfga module for program unit operations (mutations, crossover with an other program, etc.) and bfgaLengthString for the fitness function.
 
 ### Change unit operations
