@@ -22,6 +22,7 @@ To use the algorithm, you must implement the fitness function corresponding to y
 It is then necessary to implement 4 functions:
 <ul>
 <li>fitness: assigns a score to a program according to its execution within the embedded interpreter :
+	
 		```
 		output, m_Ticks = execute(ent.program, input, instructionsSet)
 		score = 0
@@ -31,7 +32,8 @@ It is then necessary to implement 4 functions:
 		ent.bonus += (2000 - m_Ticks)
 		abs(score)
 		```
-		A bonus can be earned according to criteria you choose. Here it's about the number of executions within the interpreter.</li>
+		
+A bonus can be earned according to criteria you choose. Here it's about the number of executions within the interpreter.</li>
 <li>simulate_entity: the simulation function that will display performances of the best algorithms every 1000 generations.</li>
 <li>getTargetFitness() : return the target fitness</li>
 <li>getParams(): returns a GAParams object (see Types.jl) that specifies the initial parameters of the algorithm: population size, maximum number of generations, genome size and its maximum, log file, etc.</li>
