@@ -5,7 +5,7 @@ Voir son répository Github qui renvoie lui-meme vers son article: https://githu
 
 Ai5 est donc la version de Ai Programmer en Julia.
 
-##L'architecture de la fonction : 
+## L'architecture de la fonction : 
 
 List of modules of the GA:
     - GeneticAlgorithms: this module is the GA Manager. It does every operation of the global algorithm: evaluate and crossover population, write on the log file, decide when the genome size has to be expanded and when the algorithm has to stop.
