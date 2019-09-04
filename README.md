@@ -25,10 +25,7 @@ It is then necessary to implement 4 functions:
 	
 		```
 		output, m_Ticks = execute(ent.program, input, instructionsSet)
-		score = 0
-		n= length(output)
-		diff = output[1] - goal
-		score = 256 - abs(diff) #+ (diff == 0 ? 0 : (diff > 0 ? -1 : -2) )
+		score = 256 - abs(output[1] - goal) 
 		ent.bonus += (2000 - m_Ticks)
 		abs(score)
 		```
