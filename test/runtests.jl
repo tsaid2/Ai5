@@ -4,7 +4,7 @@ using Random
 #Random.seed!(9874984737484)
 
 for tests in [
-			"runtestString.jl",		# work sure
+			#"runtestString.jl",		# work sure
             #"runtestAdd.jl", 			#
 			#"runtestLogicalOr.jl",		#
 			#"runtestLogicalXor.jl", 	#
@@ -19,7 +19,8 @@ for tests in [
 			#"runtestExtractInQuoteInside.jl"
 			#"runtestFibonacci.jl"
 			#"runtestTrimLefToFQuote.jl"
-			#"runtestCountdown.jl"
+			#"runtestCountdown.jl
+			"runtestSubtract.jl"
 ]
     include(tests)
 end
