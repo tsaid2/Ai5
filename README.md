@@ -17,6 +17,8 @@ Ai5 is therefore the version of Ai Programmer in Julia.
 </ul>
 
 ## Use the algorithm : 
+
+### The fitness function
 To use the algorithm, you must implement the fitness function corresponding to your task. For the illustration, we will use the fitness function of length(::String) which we call bfgaLengthString in the src/ folder.
 
 It is then necessary to implement 4 functions:
@@ -37,5 +39,16 @@ A bonus can be earned according to criteria you choose. Here it's about the numb
 </ul>
 
 Do not forget to build the input/output set illustrating the task to be accomplished.
-	
+
+Pour lancer le GA avec ta fitness function, Vous appelez ```GeneticAlgorithms.runga(bfga, bfgaLengthString)```. GeneticAlgorithms va alors utiliser le module bfga pour les opérations sur les programmes (mutations, crossover etc.) et bfgaLengthString pour la fonction de fitness.
+To start the GA with your fitness function, you call ```GeneticAlgorithms.runga(bfga, bfgaLengthString)```. GeneticAlgorithms will use the bfga module for program unit operations (mutations, crossover with an other program, etc.) and bfgaLengthString for the fitness function.
+
+### Change unit operations
+To change unit operations, you can copy (or not) bfga.jl and change the body of functions that interest you.
+
+### Run Tests
+Finally, you can write a test file in the test/ folder to check the partial correctness of the returned program. In those given in this repository, the format is runtestLengthString.
+
+
+
 
